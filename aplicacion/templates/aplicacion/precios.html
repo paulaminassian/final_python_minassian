@@ -1,0 +1,31 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Tucci S.A.</h1>
+<p class="lead text-white-50 mb-4">Precios</p>
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <h1>Precios<h1>
+        <h6>    
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ruta</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for p in precios %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.ruta }}</td>
+                <td>{{ p.precio }}</td>
+            </tr>
+    {% endfor %}
+        </h6>
+        </tbody>  
+    </table>
+{% endblock contenido %}
