@@ -12,12 +12,11 @@ sino se puede hacer por ruta de la siguiente manera:
     - Consultar maritimas: localhost:8000/aplicacion/maritimas
     - Consultar rutas: localhost:8000/aplicacion/rutas
     - Consultar precios: localhost:8000/aplicacion/precios
+    -Busqueda de Cursos por patron en el nombre: localhost:8000/aplicacion/buscar
 
--Orden de prueba de la Aplicacion
+FORMS:
     - Crear clientes : localhost:8000/aplicacion/clientes_form
     - Crear maritimas: localhost:8000/aplicacion/maritimas_form
     - Crear rutas: localhost:8000/aplicacion/rutas_form
     - Crear precios: localhost:8000/aplicacion/precios_form
 
-
--Busqueda de Cursos por patron en el nombre: localhost:8000/aplicacion/buscar
