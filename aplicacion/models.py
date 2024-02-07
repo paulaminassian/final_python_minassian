@@ -8,6 +8,10 @@ class Clientes(models.Model):
     
     def __str__(self):
         return f'{self.razon_social}'
+    
+    class Meta:
+        verbose_name = "Cliente"
+        verbose_name_plural = "Clientes"
 
 class Maritimas(models.Model):
     maritima = models.CharField(max_length=50)
@@ -16,12 +20,20 @@ class Maritimas(models.Model):
     def __str__(self):
         return f'{self.maritima}'
     
+    class Meta:
+        verbose_name = "Maritima"
+        verbose_name_plural = "Maritimas"
+    
 class Rutas(models.Model):
     origen = models.CharField(max_length=50)
     destino = models.CharField(max_length=50) 
     
     def __str__(self):
         return f'{self.origen} - {self.destino}'
+    
+    class Meta:
+        verbose_name = "Ruta"
+        verbose_name_plural = "Rutas"
 
     
 class Precios(models.Model):
@@ -30,3 +42,7 @@ class Precios(models.Model):
     
     def __str__(self):
         return f'{self.ruta}'
+    
+    class Meta:
+        verbose_name = "Precio"
+        verbose_name_plural = "Precios"
