@@ -7,7 +7,7 @@ class Clientes(models.Model):
     contacto = models.EmailField()
     
     def __str__(self):
-        return f'{self.razon_social}'
+        return f'Cliente: {self.razon_social} - Contacto: {self.contacto}'
     
     class Meta:
         verbose_name = "Cliente"
@@ -18,7 +18,7 @@ class Maritimas(models.Model):
     contacto = models.EmailField()
     
     def __str__(self):
-        return f'{self.maritima}'
+        return f' Maritima: {self.maritima} - Contacto: {self.contacto}'
     
     class Meta:
         verbose_name = "Maritima"
@@ -29,7 +29,7 @@ class Rutas(models.Model):
     destino = models.CharField(max_length=50) 
     
     def __str__(self):
-        return f'{self.origen} - {self.destino}'
+        return f' Origen: {self.origen} - Destino: {self.destino}'
     
     class Meta:
         verbose_name = "Ruta"
@@ -41,7 +41,7 @@ class Precios(models.Model):
     precio=models.IntegerField()
     
     def __str__(self):
-        return f'{self.ruta}'
+        return f'Ruta:{self.ruta} - Precio: {self.precio}'
     
     class Meta:
         verbose_name = "Precio"
