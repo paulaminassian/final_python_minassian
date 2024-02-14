@@ -1,5 +1,6 @@
 from django.urls import path, include
 from .views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     
@@ -31,8 +32,13 @@ urlpatterns = [
     path('precios_delete/<int:pk>/', PreciosDelete.as_view(), name="precio_delete"),
     
 
-    #____________________________________Busquedas&Filstros
+    #____________________________________Busquedas&Filtros
     path('buscar/', buscar, name = "buscar"),
     path('buscar_clientes/', buscarClientes, name = "buscar_clientes"),
+    
+    #____________________________________login,logout, registro
+    path('login/', login_request, name = "login"),
+    path('registro/', register, name = "registro"),
+    path('logout/', LogoutView.as_view(template_name="aplicacion/logout.html") , name = "logout"),
     
 ]
