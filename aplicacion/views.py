@@ -121,7 +121,18 @@ def login_request(request):
             user = authenticate(username = usuario, password = password)
             if user is not None:
                 login(request, user)
-                return redirect(reverse_lazy('home'))
+                
+                
+                #___________Avatar
+                try:
+                    avatar = Avatar.objects.get(user=request.user.id).imagen.url
+                except:
+                    avatar = "/media/avatares/default.png"
+                finally:
+                    request.session["avatar"] = avatar
+                    
+                    
+                return redirect(reverse_lazy('home'))   
             else:
                 return redirect(reverse_lazy('login'))
                     
@@ -144,4 +155,69 @@ def register(request):
             miForm = RegistroForm()
             
         return(render(request, "aplicacion/registro.html", {"form": miForm}))
+    
+    
+
+
+
+#_____________________________________________Editar perfil de usuario
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+            user = User.objects.get(username=usuario)
+            user.email = informacion['email']
+            user.first_name = informacion['first_name']
+            user.last_name = informacion['last_name']
+            user.set_password(informacion['password1'])
+            user.save()
+            return render(request, "aplicacion/home.html")
+    else:
+        form=UserEditForm(instance=usuario)
+        
+    return render(request, "aplicacion/editarPerfil.html", {"form": form})
+
+
+
+#_______________________________________________
+
+@login_required
+def agregarAvatar(request):
+    
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            usuario = User.objects.get(username=request.user)
+            
+            #para borrar el avatar viejo
+            avatarViejo = Avatar.objects.filter(user=usuario)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            #_____________________
+            avatar = Avatar(user=usuario,imagen=form.cleaned_data['imagen'])
+            avatar.save()
+            
+            
+            #_____________________hagu una url de la imagen en request
+            imagen = Avatar.objects.get(user=request.user.id).imagen.url
+            request.session["avatar"] = imagen
+            return render(request, "aplicacion/home.html")
+        
+    else:
+        form = AvatarForm()
+        
+    return render(request, "aplicacion/agregarAvatar.html", {"form": form})
+    
+
+    
+        
+        
+        
+    
+    
         

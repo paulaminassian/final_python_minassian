@@ -28,8 +28,16 @@
                 <a class="navbar-brand" href="{% url 'rutas' %}">Rutas</a>
                 <a class="navbar-brand" href="{% url 'precios' %}">Precios</a>
                 <a class="navbar-brand" href="{% url 'buscar' %}">Buscar Clientes</a>
-
-                <p style="color:green">Hola {{user.username}}!</p>
+                
+ 
+                <p style="color: violet">Hola {{user.username}}!</p>
+                <div class="text-center">
+                    <a href="{% url 'agregar_avatar' %}"><img = src="{{ request.session.avatar}}"  height="40px" weight="40px"/></a>
+                </div>
+                
+                <a class="btn btn-primary" href="{% url 'editar_perfil' %}">Editar Perfil</a> 
+                
+                <div class="text-center">
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-primary">Logout</button>
