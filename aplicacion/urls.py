@@ -7,6 +7,9 @@ urlpatterns = [
     #____________________________________Home
     path('', home, name = "home"),
     
+    #____________________________________About
+    path('about', about, name = "about"),
+    
     #____________________________________Clientes
     path('clientes/', ClientesList.as_view(), name="clientes"),
     path('clientes_create/', ClientesCreate.as_view(), name="cliente_create"),
@@ -35,6 +38,7 @@ urlpatterns = [
     #____________________________________Busquedas&Filtros
     path('buscar/', buscar, name = "buscar"),
     path('buscar_clientes/', buscarClientes, name = "buscar_clientes"),
+    path('buscar_maritimas/', buscarMaritimas, name = "buscar_maritimas"),
     
     #____________________________________login,logout, registro
     path('login/', login_request, name = "login"),

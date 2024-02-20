@@ -1,19 +1,11 @@
 {% extends 'aplicacion/home.html' %}
 
 {% block titulo %}
-<h1 class="display-5 fw-bolder text-white mb-2"> Buscar Clientes</h1>
-<p class="lead text-white-50 mb-4">Buscar por nombre</p>
+<h1 class="display-5 fw-bolder text-white mb-2"> Buscar </h1>
+<p class="lead text-white-50 mb-4">Seleccione qué desea buscar</p>
 {% endblock titulo %}
-    
 
 {% block contenido %}
-
-<form action="{% url 'buscar_clientes' %}" method="get">
-    {% csrf_token %}
-
-    <p>  Ingrese el valor a buscar:   <input type = "text" name = "buscar" id = "buscar"></p>
-    
-    <input type="submit" value="Buscar">
-</form>
-
+<a href="{% url 'buscar_clientes' %}" class="btn btn-primary">Buscar Clientes</a>
+<a href="{% url 'buscar_maritimas' %}" class="btn btn-primary">Buscar Marítimas</a>
 {% endblock contenido %}

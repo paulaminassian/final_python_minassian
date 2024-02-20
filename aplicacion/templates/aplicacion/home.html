@@ -15,36 +15,69 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilo de fondo para todo el cuerpo -->
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        header {
+            background-image: url('/media/fondo/contenedor.jpg');
+            background-size: 120%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        footer {
+            background-image: url('/media/fondo/contenedor.jpg');
+            background-size: 120%;
+            background-position: bottom;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 <body>
     <!-- Responsive navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
             <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+            <a class="btn btn-link" href="{% url 'about' %}">Acerca de mi</a> 
 
+
+            
             {% if user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'clientes' %}">Clientes</a>
                 <a class="navbar-brand" href="{% url 'maritimas' %}">Maritimas</a>
                 <a class="navbar-brand" href="{% url 'rutas' %}">Rutas</a>
                 <a class="navbar-brand" href="{% url 'precios' %}">Precios</a>
-                <a class="navbar-brand" href="{% url 'buscar' %}">Buscar Clientes</a>
+            
+                <!-- Dropdown para buscar -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Buscar
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'buscar_clientes' %}">Buscar Clientes</a></li>
+                    <li><a class="dropdown-item" href="{% url 'buscar_maritimas' %}">Buscar Marítimas</a></li>
+                </ul>
+            </div>
+
                 
- 
-                <p style="color: violet">Hola {{user.username}}!</p>
+
+                <p style="color: lightgreen; font-size: 18px; font-weight: bold; margin-top: 10px;">Hola {{user.username}}!</p>
                 <div class="text-center">
-                    <a href="{% url 'agregar_avatar' %}"><img = src="{{ request.session.avatar}}"  height="40px" weight="40px"/></a>
+                    <a href="{% url 'agregar_avatar' %}"><img src="{{ request.session.avatar }}" height="40px" width="40px" /></a>
                 </div>
                 
-                <a class="btn btn-primary" href="{% url 'editar_perfil' %}">Editar Perfil</a> 
+                <a class="btn btn-primary btn-sm" href="{% url 'editar_perfil' %}">Editar Perfil</a> 
                 
                 <div class="text-center">
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Logout</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
                 </form>
             {% else %}
-                <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
-                <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
+                <a class="btn btn-outline-success" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-outline-info" href="{% url 'registro' %}">Registro</a>
             {% endif %}
                 
         
@@ -60,7 +93,7 @@
                 <div class="col-lg-6">
                     <div class="text-center my-5">
                         {% block titulo %}
-                        <h1 class="display-5 fw-bolder text-white mb-2">TUCCI Shipping</h1>
+                        <h1 class="display-5 fw-bolder text-white mb-2 ">TUCCI Shipping</h1>
                         <p class="lead text-white-50 mb-4">Just in Time</p>
                         {% endblock titulo %}
                     </div>
@@ -71,16 +104,16 @@
 
     {% block contenido %}
     <!-- Testimonials section-->
-    <section class="py-5 border-bottom">
+        <section class="py-5 border-bottom text-white">
         <div class="container px-5 my-5 px-5">
             <div class="text-center mb-5">
                 <h2 class="fw-bolder">Opiniones</h2>
-                <p class="lead mb-0">Nuestros clientes aman trabajar con nosotros!</p>
+                <p class="lead mb-0">Feedback de la semana:</p>
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
                     <!-- Testimonial 1-->
-                    <div class="card mb-4">
+                    <div class="card mb-4 text-black">
                         <div class="card-body p-4">
                             <div class="d-flex">
                                 <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
@@ -92,7 +125,7 @@
                         </div>
                     </div>
                     <!-- Testimonial 2-->
-                    <div class="card">
+                    <div class="card mb-4 text-black">
                         <div class="card-body p-4">
                             <div class="d-flex">
                                 <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
@@ -111,7 +144,7 @@
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">
-        <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; TucciCo 2023</p></div>
     </footer>
 
     <!-- Bootstrap core JS -->

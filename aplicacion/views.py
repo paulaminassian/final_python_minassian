@@ -4,7 +4,7 @@ from .models import *
 from .forms import *
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
+from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,6 +15,12 @@ from django.contrib.auth.decorators import login_required
 #__________________________________________Home
 def home(request):
     return render(request, "aplicacion/home.html")
+
+
+#__________________________________________About
+def about(request):
+    return render(request, "aplicacion/acerca.html")
+
 
 #__________________________________________Clientes
 
@@ -99,15 +105,28 @@ class PreciosDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def buscar(request):
     return render(request, "aplicacion/buscar.html")
+
 @login_required
 def buscarClientes(request):
-    if request.GET["buscar"]:
-        patron = request.GET["buscar"]
-        clientes_list= Clientes.objects.filter(razon_social__icontains=patron)
-        contexto = {"clientes_list": clientes_list}
-        return render(request, "aplicacion/clientes_list.html", contexto)
-    return HttpResponse("No se ingresaron patrones de busqueda")
+    if request.method == 'GET':
+        try:
+            patron = request.GET["buscar"]
+            clientes_list = Clientes.objects.filter(razon_social__icontains=patron)
+            contexto = {"clientes_list": clientes_list}
+            return render(request, "aplicacion/clientes_list.html", contexto)
+        except MultiValueDictKeyError:
+            return render(request, 'aplicacion/buscar_clientes_form.html')
 
+def buscarMaritimas(request):
+    if request.method == 'GET':
+        try:
+            patron = request.GET["buscar"]
+            maritimas_list = Maritimas.objects.filter(maritima__icontains=patron)
+            contexto = {"maritimas_list": maritimas_list}
+            return render(request, "aplicacion/maritimas_list.html", contexto)
+        except MultiValueDictKeyError:
+            return render(request, 'aplicacion/buscar_maritimas_form.html')
+        
 
 #__________________________________________Login, Logout, Registro
 

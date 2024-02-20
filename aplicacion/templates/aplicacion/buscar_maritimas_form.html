@@ -1,0 +1,14 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2"> Buscar Marítimas </h1>
+<p class="lead text-white-50 mb-4">Ingrese el valor a buscar</p>
+{% endblock titulo %}
+
+{% block contenido %}
+<form action="{% url 'buscar_maritimas' %}" method="get">
+    {% csrf_token %}
+    <p> Ingrese el valor a buscar: <input type="text" name="buscar" id="buscar"></p>
+    <input type="submit" value="Buscar">
+</form>
+{% endblock contenido %}
