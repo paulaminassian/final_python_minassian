@@ -167,7 +167,7 @@ def register(request):
             if miForm.is_valid():
                 usuario = miForm.cleaned_data.get("username")
                 miForm.save()      
-                return redirect(reverse_lazy('home'))
+                return redirect(reverse_lazy('login'))
             
                             
         else:
@@ -222,7 +222,7 @@ def agregarAvatar(request):
             avatar.save()
             
             
-            #_____________________hagu una url de la imagen en request
+            #_____________________hago una url de la imagen en request
             imagen = Avatar.objects.get(user=request.user.id).imagen.url
             request.session["avatar"] = imagen
             return render(request, "aplicacion/home.html")
