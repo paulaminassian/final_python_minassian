@@ -40,13 +40,13 @@ urlpatterns = [
     path('buscar_clientes/', buscarClientes, name = "buscar_clientes"),
     path('buscar_maritimas/', buscarMaritimas, name = "buscar_maritimas"),
     
-    #____________________________________login,logout, registro
+    #____________________________________Login, logout, registro
     path('login/', login_request, name = "login"),
     path('registro/', register, name = "registro"),
     path('logout/', LogoutView.as_view(template_name="aplicacion/logout.html") , name = "logout"),
     
     
-    
+    #____________________________________Perfil
     path('editar_perfil/', editarPerfil, name = "editar_perfil"),
     path('agregar_avatar/', agregarAvatar, name = "agregar_avatar"),
     

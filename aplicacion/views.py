@@ -142,7 +142,7 @@ def login_request(request):
                 login(request, user)
                 
                 
-                #___________Avatar
+                #___________Avatar por Default.
                 try:
                     avatar = Avatar.objects.get(user=request.user.id).imagen.url
                 except:
@@ -202,7 +202,7 @@ def editarPerfil(request):
 
 
 
-#_______________________________________________
+#_______________________________________________Modificar Avatar
 
 @login_required
 def agregarAvatar(request):
@@ -217,7 +217,8 @@ def agregarAvatar(request):
             if len(avatarViejo) > 0:
                 for i in range(len(avatarViejo)):
                     avatarViejo[i].delete()
-            #_____________________
+            
+            #avatar_nuevo
             avatar = Avatar(user=usuario,imagen=form.cleaned_data['imagen'])
             avatar.save()
             
